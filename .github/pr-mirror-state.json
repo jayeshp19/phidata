@@ -1,0 +1,25 @@
+{
+  "last_run": "2025-08-28T10:46:55.594Z",
+  "mirrored": {
+    "4361": {
+      "head_sha": "4849bd43b86e1aefa6ab7e4b7b42ef70e243946f",
+      "branch": "upstream-pr-4361",
+      "base": "main",
+      "fork_pr_url": "https://github.com/jayeshp19/phidata/pull/1",
+      "fork_pr_number": 1,
+      "last_updated": "2025-08-28T10:46:55.594Z",
+      "upstream_title": "[feat] Add SFX support to ModelsLabTools",
+      "upstream_author": "anurag12-webster"
+    },
+    "4363": {
+      "head_sha": "d99b42418683fc6bb32a6b6ddcdd766987b37231",
+      "branch": "upstream-pr-4363",
+      "base": "main",
+      "fork_pr_url": "https://github.com/jayeshp19/phidata/pull/2",
+      "fork_pr_number": 2,
+      "last_updated": "2025-08-28T10:46:55.594Z",
+      "upstream_title": "feat: Add caching responses for agents",
+      "upstream_author": "dirkbrnd"
+    }
+  }
+}
