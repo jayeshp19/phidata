@@ -1,3 +1,4 @@
+
 name: Mirror Upstream PRs
 
 on:
@@ -51,10 +52,8 @@ jobs:
       - name: Mirror upstream PRs
         uses: actions/github-script@v7
         env:
-          UPSTREAM_OWNER: agno-agi
-          UPSTREAM_REPO: agno
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Optional for private upstream fetches:
+          # Optional for private upstream fetches (PAT or App token with repo read):
           # UPSTREAM_TOKEN: ${{ secrets.UPSTREAM_TOKEN }}
         with:
           script: |
@@ -83,18 +82,32 @@ jobs:
             const now           = new Date();
             const checkFrom     = state.last_run ? new Date(state.last_run) : new Date(now.getTime() - hoursBack * 3600 * 1000);
 
-            const upstreamOwner = process.env.UPSTREAM_OWNER;
-            const upstreamRepo  = process.env.UPSTREAM_REPO;
+            const repoOwner = context.repo.owner;
+            const repoName  = context.repo.repo;
+
+            // Auto-detect upstream (parent/source) of this fork
+            const { data: thisRepo } = await github.rest.repos.get({ owner: repoOwner, repo: repoName });
+            if (!thisRepo.fork || (!thisRepo.parent && !thisRepo.source)) {
+              throw new Error('Cannot auto-detect upstream: this repository is not a fork (no parent/source).');
+            }
+            const upstreamMeta  = thisRepo.source || thisRepo.parent;
+            const upstreamOwner = upstreamMeta.owner.login;
+            const upstreamRepo  = upstreamMeta.name;
+            const upstreamPriv  = !!upstreamMeta.private;
 
             core.info(`Window: ${checkFrom.toISOString()} → ${now.toISOString()} | close_outdated=${closeOutdated} | stealth=${stealth}`);
+            core.info(`Detected upstream: ${upstreamOwner}/${upstreamRepo}${upstreamPriv ? ' (private)' : ''}`);
 
-            // If private upstream, auth header for git fetch
+            // If private upstream, auth header for git fetch (needs UPSTREAM_TOKEN)
+            if (upstreamPriv && !process.env.UPSTREAM_TOKEN) {
+              core.warning('Upstream is private but UPSTREAM_TOKEN is not set; fetch by pull ref will likely fail.');
+            }
             if (process.env.UPSTREAM_TOKEN) {
               const header = "AUTHORIZATION: basic " + Buffer.from(`x-access-token:${process.env.UPSTREAM_TOKEN}`).toString('base64');
               shQuiet(`git config --global http.https://github.com/.extraheader "${header}"`);
             }
 
-            // Get PRs updated in window
+            // List PRs updated in window
             async function listUpdatedPRsPaged() {
               const all = [];
               let page = 1;
@@ -115,9 +128,6 @@ jobs:
             const prs = await listUpdatedPRsPaged();
             core.info(`Upstream PRs updated in window: ${prs.length}`);
 
-            const repoOwner = context.repo.owner;
-            const repoName  = context.repo.repo;
-
             const results = { created: [], updated: [], skipped: [], failed: [], closed: [] };
 
             async function ensureLabel(name, color) {
@@ -129,43 +139,41 @@ jobs:
             }
             await ensureLabel('upstream-mirror', '1d76db');
 
-            // Sanitizer: remove patterns that cause cross‑repo notifications
+            // Body sanitizer (no links/mentions/issue refs)
             function sanitizeBody(src) {
               if (!src) return '*No description provided*';
-
               let text = src;
-
-              // 1) owner/repo#123 -> owner / repo PR 123
               text = text.replace(/\b([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+)#(\d+)\b/g, (_, o, r, n) => `${o} / ${r} PR ${n}`);
-
-              // 2) #123 -> PR 123
-              // Avoid headings at line start like "# Title" by requiring a digit after #
               text = text.replace(/(^|[^A-Za-z0-9_/.-])#(\d+)\b/g, (m, pre, n) => `${pre}PR ${n}`);
-
-              // 3) @mentions -> full‑width at to avoid pings
               text = text.replace(/@([A-Za-z0-9-]+)/g, '＠$1');
-
-              // 4) GitHub URLs to PRs/issues/commits -> hxxps (no autolink)
               text = text.replace(/https?:\/\/github\.com\/\S+/gi, (u) => u.replace(/^https:/i, 'hxxps:').replace(/^http:/i, 'hxxp:'));
-
-              // 5) Collapse accidental double spaces from replacements
               text = text.replace(/ {2,}/g, ' ');
-
               return text;
             }
 
-            // Build stealth body without any autolinking
+            // Inline sanitizer (for titles)
+            function sanitizeInline(s) {
+              if (!s) return '';
+              let t = s;
+              t = t.replace(/\b([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+)#(\d+)\b/g, (_, o, r, n) => `${o} / ${r} PR ${n}`);
+              t = t.replace(/(^|[^A-Za-z0-9_/.-])#(\d+)\b/g, (m, pre, n) => `${pre}PR ${n}`);
+              t = t.replace(/@([A-Za-z0-9-]+)/g, '＠$1');
+              return t;
+            }
+
+            // Build stealth body
             function buildBody(pr, headSha, nowISO, prevSha) {
-              const safeRef   = `${upstreamOwner} / ${upstreamRepo} PR ${pr.number}`;
-              const safeSHA   = headSha.substring(0, 7);
-              const created   = new Date(pr.created_at).toISOString().split('T')[0];
-              const updated   = new Date(pr.updated_at).toISOString().split('T')[0];
+              const safeUser = (u) => `＠${u}`; // full-width @
+              const safeRef  = `${upstreamOwner} / ${upstreamRepo} PR ${pr.number}`;
+              const safeSHA  = headSha.substring(0, 7);
+              const created  = new Date(pr.created_at).toISOString().split('T')[0];
+              const updated  = new Date(pr.updated_at).toISOString().split('T')[0];
 
               const headerTbl =
                 `| Field | Value |\n` +
                 `| --- | --- |\n` +
                 `| Upstream | ${safeRef} |\n` +
-                `| Author | @${pr.user.login} |\n` +
+                `| Author | ${safeUser(pr.user.login)} |\n` +
                 `| Created | ${created} |\n` +
                 `| Last Updated | ${updated} |\n` +
                 `| Mirrored At | ${nowISO} |\n` +
@@ -174,10 +182,7 @@ jobs:
 
               const desc = sanitizeBody(pr.body);
               const maybeUpdated = (prevSha && prevSha !== headSha) ? `\n---\nUpdated with new commits at ${nowISO}\n` : '';
-
-              // Store an opaque pointer without protocol so it won't autolink
               const meta = `<!-- upstream=${upstreamOwner}/${upstreamRepo} PR=${pr.number} sha=${safeSHA} -->`;
-
               return `## Mirrored from upstream\n\n${headerTbl}\n\n### Original Description (sanitized)\n\n${desc}\n${maybeUpdated}\n${meta}`;
             }
 
@@ -257,7 +262,7 @@ jobs:
                 } else {
                   const created = await github.rest.pulls.create({
                     owner: repoOwner, repo: repoName,
-                    title: `[Upstream PR ${number}] ${pr.title}`,  // no owner/repo#num pattern
+                    title: `[Upstream PR ${number}] ${sanitizeInline(pr.title)}`,  // sanitized title
                     body, head: branchName, base: baseRef, draft: true
                   });
                   forkPRUrl = created.data.html_url;
@@ -343,6 +348,7 @@ jobs:
 
             await core.summary
               .addHeading('Upstream PR Mirror Report')
+              .addRaw(`Upstream: ${upstreamOwner} / ${upstreamRepo}\n`)
               .addRaw(`Time Range: ${checkFrom.toISOString()} → ${now.toISOString()}\n`)
               .addRaw(`Rate Limit: ${rateLimit.rate.remaining}/${rateLimit.rate.limit}\n\n`)
               .addRaw(lines.join('\n'))
