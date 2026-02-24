@@ -8,7 +8,7 @@ from pydantic import BaseModel
 from agno.exceptions import ModelProviderError
 from agno.models.base import Model
 from agno.models.message import Message
-from agno.models.metrics import Metrics
+from agno.models.metrics import MessageMetrics
 from agno.models.response import ModelResponse
 from agno.run.agent import RunOutput
 from agno.utils.log import log_debug, log_error, log_warning
@@ -498,9 +498,6 @@ class AwsBedrock(Model):
                 log_debug(f"Calling {self.provider} with request parameters: {self.request_params}", log_level=2)
                 body.update(**self.request_params)
 
-            if run_response and run_response.metrics:
-                run_response.metrics.set_time_to_first_token()
-
             assistant_message.metrics.start_timer()
             response = self.get_client().converse(modelId=self.id, messages=formatted_messages, **body)
             assistant_message.metrics.stop_timer()
@@ -545,9 +542,6 @@ class AwsBedrock(Model):
 
             if self.request_params:
                 body.update(**self.request_params)
-
-            if run_response and run_response.metrics:
-                run_response.metrics.set_time_to_first_token()
 
             assistant_message.metrics.start_timer()
 
@@ -600,9 +594,6 @@ class AwsBedrock(Model):
                 log_debug(f"Calling {self.provider} with request parameters: {self.request_params}", log_level=2)
                 body.update(**self.request_params)
 
-            if run_response and run_response.metrics:
-                run_response.metrics.set_time_to_first_token()
-
             assistant_message.metrics.start_timer()
 
             async with self.get_async_client() as client:
@@ -650,9 +641,6 @@ class AwsBedrock(Model):
 
             if self.request_params:
                 body.update(**self.request_params)
-
-            if run_response and run_response.metrics:
-                run_response.metrics.set_time_to_first_token()
 
             assistant_message.metrics.start_timer()
 
@@ -813,20 +801,23 @@ class AwsBedrock(Model):
 
         return model_response, current_tool
 
-    def _get_metrics(self, response_usage: Dict[str, Any]) -> Metrics:
+    def _get_metrics(self, response_usage: Dict[str, Any]) -> MessageMetrics:
         """
-        Parse the given AWS Bedrock usage into an Agno Metrics object.
+        Parse the given AWS Bedrock usage into an Agno MessageMetrics object.
 
         Args:
             response_usage: Usage data from AWS Bedrock
 
         Returns:
-            Metrics: Parsed metrics data
+            MessageMetrics: Parsed metrics data
         """
-        metrics = Metrics()
+        metrics = MessageMetrics()
 
         metrics.input_tokens = response_usage.get("inputTokens", 0) or 0
         metrics.output_tokens = response_usage.get("outputTokens", 0) or 0
         metrics.total_tokens = metrics.input_tokens + metrics.output_tokens
+
+        metrics.cache_read_tokens = response_usage.get("cacheReadInputTokens", 0) or 0
+        metrics.cache_write_tokens = response_usage.get("cacheWriteInputTokens", 0) or 0
 
         return metrics
