@@ -6,9 +6,8 @@ Approval-backed HITL: @approval + @tool(requires_confirmation=True) with persist
 """
 
 import json
-import os
-
 import httpx
+
 from agno.agent import Agent
 from agno.approval import approval
 from agno.db.sqlite import SqliteDb
