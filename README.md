@@ -24,10 +24,7 @@
 
 ## What is Agno
 
-Agno is the runtime for agentic software.
-- Build agents, teams, and workflows.
-- Run them as scalable services.
-- Monitor and manage them in production.
+Agno is the runtime for agentic software. Build agents, teams, and workflows. Run them as scalable services. Monitor and manage them in production.
 
 | Layer | What it does |
 |-------|--------------|
