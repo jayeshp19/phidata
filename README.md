@@ -9,7 +9,7 @@
 </div>
 
 <p align="center">
-  Build, run, and manage multi-agent services at scale.
+  Build, run, and manage agentic software at scale.
 </p>
 
 <div align="center">
