@@ -142,11 +142,11 @@ Choose whichever path suits you best:
 - [**Scheduling**](https://docs.agno.com/runtime/scheduling). Cron-based scheduling and background jobs with no external infrastructure.
 - [**Deploy anywhere**](https://docs.agno.com/runtime/deploy). Run on any cloud platform that can run a containerized image. Docker, Railway, AWS, GCP.
 
-## IDE integration
+## Coding agent integration
 
 Two options for using Agno with your coding tools:
 
-1. **Add Agno documentation as a source.**
+1. **Add Agno documentation as an indexed source.**
 
    For example, in **Cursor:** Settings → Indexing & Docs → Add `https://docs.agno.com/llms-full.txt`.
 
