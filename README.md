@@ -91,7 +91,7 @@ export OPENAI_API_KEY=sk-***
 fastapi dev workbench.py
 ```
 
-In ~30 lines of code, you get:
+In 30 lines of code, you get:
 
 - A FastAPI backend with 50+ endpoints
 - Streaming responses, persistent sessions, per-user isolation
@@ -118,7 +118,7 @@ The agent reads your workspace and answers grounded in what it actually finds. T
 
 https://github.com/user-attachments/assets/adb38f55-1d9d-463e-8ca9-966bb6bdc37a
 
-## AgentOS features
+## Agno features
 
 - [**Production API**](https://docs.agno.com/runtime/serve-as-api). 50+ endpoints with SSE and websockets to build your product on.
 - [**Storage**](https://docs.agno.com/runtime/storage). Sessions, memory, knowledge, and traces in your own database.
