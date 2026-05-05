@@ -14,21 +14,21 @@
 
 ## Introduction
 
-Agno provides software for building, running and managing agent platforms. Build agents using any agent framework. Run them as production services with session management, tracing, scheduling, and RBAC. Manage your agent platform using a single control plane.
+Agno provides software for building, running, and managing agent platforms. Build agents using any agent framework. Run them as production services with session management, tracing, scheduling, and RBAC. Manage your agent platform using a single control plane.
 
-Agno has a 3 layer architecture, everything except the control plane is free and open-source.
+Agno has a 3-layer architecture. Everything except the control plane is free and open-source.
 
 | Layer | Use it to |
 |-------|--------------|
 | **SDK** | Build agents, multi-agent teams, and agentic workflows. |
-| **Runtime** | Run your agents, teams and workflows as a service. |
+| **Runtime** | Run your agents, teams, and workflows as a service. |
 | **Control Plane** | Manage your platform using the [AgentOS UI](https://os.agno.com). |
 
 ## Example: coding agent as a service
 
 Here's how to run a coding agent as a service.
 
-#### Built using the Agno SDK
+### Built using the Agno SDK
 
 Save this file as `workbench.py`:
 
@@ -59,7 +59,7 @@ agent_os = AgentOS(
 app = agent_os.get_app()
 ```
 
-`Workspace(".")` scopes the agent to the current directory. `read`, `list`, and `search` run freely; `write`, `edit`, `move`, `delete`, and `shell` require human approval.
+`Workspace(".")` scopes the agent to the current directory. `read`, `list`, and `search` run freely; `write`, `edit`, `delete`, and `shell` require human approval.
 
 <details>
 <summary><strong>Built using the Claude Agent SDK</strong></summary>
@@ -81,7 +81,7 @@ app = agent_os.get_app()
 ```
 </details>
 
-#### Run it
+### Run it
 
 ```bash
 uv pip install -U 'agno[os]' openai
@@ -102,10 +102,10 @@ API is available at `http://localhost:8000` and OpenAPI spec at `http://localhos
 
 ### Manage your platform using the AgentOS UI
 
-You can use the [AgentOS UI](https://os.agno.com) to manage your agent platform. Use it to test your agents, inspect runs, view traces, manage sessions, and monitor the health of the system. It is free to use with a local AgentOS.
+You can use the [AgentOS UI](https://os.agno.com) to manage your agent platform. Use it to test your agents, inspect runs, view traces, manage sessions, and monitor the health of the system. It's free to use with a local AgentOS.
 
 1. Open [os.agno.com](https://os.agno.com) and sign in.
-2. Click **"Connect OS"**
+2. Click **"Connect OS"**.
 3. Select **"Local"** to connect to a local AgentOS.
 4. Enter your endpoint URL (default: `http://localhost:8000`).
 5. Name it "Local AgentOS" and click **"Connect"**.
@@ -114,11 +114,11 @@ Open Chat, select your agent, and ask:
 
 > Tell me more about the project and the key files
 
-The agent reads your workspace and answers grounded in what it actually finds. Try a follow-up like "create a NOTES.md with three key takeaways". The run pauses for your approval before the file is written, since `write_file` is a confirm-required tool by default.
+The agent reads your workspace and answers grounded in what it actually finds. Try a follow-up like "create a NOTES.md with three key takeaways." The run pauses for your approval before the file is written, since `write` is in the confirm list.
 
 https://github.com/user-attachments/assets/adb38f55-1d9d-463e-8ca9-966bb6bdc37a
 
-### AgentOS Features
+## AgentOS features
 
 - [**Production API**](https://docs.agno.com/runtime/serve-as-api). 50+ endpoints with SSE and websockets to build your product on.
 - [**Storage**](https://docs.agno.com/runtime/storage). Sessions, memory, knowledge, and traces in your own database.
@@ -138,23 +138,22 @@ Choose whichever path suits you best:
 - [Start from a template](https://docs.agno.com/tutorials/pick-a-template)
   - [Coda →](https://docs.agno.com/tutorials/coda/overview) A code companion that lives in Slack and works alongside your team.
   - [Dash →](https://docs.agno.com/tutorials/dash/overview) A self-learning data agent that grounds answers in your business context.
-  - [Scout →](https://docs.agno.com/tutorials/scout/overview) An agent that navigates information source like slack, google drive, notion to assemble answers.
-- [Start from a blank canvas](https://docs.agno.com/tutorials/starter/overview). Build on top of the leanes agent platform template.
+  - [Scout →](https://docs.agno.com/tutorials/scout/overview) An agent that navigates information sources like Slack, Google Drive, and Notion to assemble answers.
+- [Start from a blank canvas](https://docs.agno.com/tutorials/starter/overview). Build on top of the leanest agent platform template.
 
 ## IDE integration
 
-2 Options on how to use Agno with your coding tools:
+Two options for using Agno with your coding tools:
 
+1. **Add Agno documentation as a source.**
 
-1. Add Agno documentation as a source:
+   For example, in **Cursor:** Settings → Indexing & Docs → Add `https://docs.agno.com/llms-full.txt`.
 
-For example, **Cursor:** Settings → Indexing & Docs → Add `https://docs.agno.com/llms-full.txt`
+   Also works with VSCode, Windsurf, and similar tools.
 
-Also works with VSCode, Windsurf, and similar tools.
+2. **Add Agno documentation as an MCP server.**
 
-2. Add Agno documnetation as an MCP server:
-
-Add [docs.agno.com/mcp](https://docs.agno.com/mcp) as an mcp server to your favourite coding agent.
+   Add [docs.agno.com/mcp](https://docs.agno.com/mcp) as an MCP server to your favourite coding agent.
 
 ## Contributing
 
