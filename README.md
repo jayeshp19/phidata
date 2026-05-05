@@ -118,18 +118,6 @@ The agent reads your workspace and answers grounded in what it actually finds. T
 
 https://github.com/user-attachments/assets/adb38f55-1d9d-463e-8ca9-966bb6bdc37a
 
-## Agno features
-
-- [**Production API**](https://docs.agno.com/runtime/serve-as-api). 50+ endpoints with SSE and websockets to build your product on.
-- [**Storage**](https://docs.agno.com/runtime/storage). Sessions, memory, knowledge, and traces in your own database.
-- [**Context**](https://docs.agno.com/runtime/context). Live context across Slack, Drive, wikis, MCP, and custom sources.
-- [**Human approval**](https://docs.agno.com/runtime/human-approval). Pause runs for user confirmation, admin approval, or external execution.
-- [**Observability**](https://docs.agno.com/runtime/observability). OpenTelemetry tracing, run history, and audit logs out of the box.
-- [**Security & auth**](https://docs.agno.com/runtime/security-and-auth). JWT-based RBAC and multi-user, multi-tenant isolation.
-- [**Interfaces**](https://docs.agno.com/runtime/interfaces). Slack, Telegram, WhatsApp, Discord, AG-UI, A2A, or roll your own.
-- [**Scheduling**](https://docs.agno.com/runtime/scheduling). Cron-based scheduling and background jobs with no external infrastructure.
-- [**Deploy**](https://docs.agno.com/runtime/deploy). Docker, Railway, AWS, GCP. Any container host works.
-
 ## Get started
 
 Choose whichever path suits you best:
@@ -140,6 +128,19 @@ Choose whichever path suits you best:
   - [Dash →](https://docs.agno.com/tutorials/dash/overview) A self-learning data agent that grounds answers in your business context.
   - [Scout →](https://docs.agno.com/tutorials/scout/overview) An agent that navigates information sources like Slack, Google Drive, and Notion to assemble answers.
 - [Start from a blank canvas](https://docs.agno.com/tutorials/starter/overview). Build on top of the leanest agent platform template.
+
+## Agno features
+
+- [**Production API**](https://docs.agno.com/runtime/serve-as-api). 50+ endpoints with SSE and websockets make it easy to build a product on top of your agent platform.
+- [**Storage**](https://docs.agno.com/runtime/storage). Store sessions, memory, knowledge, and traces in your own database. Use postgres for quick read/write data like sessions and memory. Use clickhouse for OLAP data like traces.
+- [**100+ integrations**](https://docs.agno.com/tools/toolkits/overview). Integrate with 100+ tools using pre-built toolkits.
+- [**Context Providers**](https://docs.agno.com/runtime/context). Use strategies like context providers to access live data stored in Slack, Drive, wikis, MCP, and custom sources.
+- [**Human approval**](https://docs.agno.com/runtime/human-approval). Built in mechanisms for pausing runs for user confirmation up to blocking tools that require admin approval.
+- [**Observability**](https://docs.agno.com/runtime/observability). Get monitoring via OpenTelemetry tracing, run history, and audit logs out of the box.
+- [**Security**](https://docs.agno.com/runtime/security-and-auth). Get JWT-based RBAC and multi-user, multi-tenant isolation out of the box.
+- [**Interfaces**](https://docs.agno.com/runtime/interfaces). Expose your agents via Slack, Telegram, WhatsApp, Discord, AG-UI, A2A.
+- [**Scheduling**](https://docs.agno.com/runtime/scheduling). Cron-based scheduling and background jobs with no external infrastructure.
+- [**Deploy anywhere**](https://docs.agno.com/runtime/deploy). Run on any cloud platform that can run a containerized image. Docker, Railway, AWS, GCP.
 
 ## IDE integration
 
