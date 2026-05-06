@@ -14,7 +14,10 @@
 
 ## Introduction
 
-Agno provides software for building, running, and managing agent platforms. Build agents using any agent framework. Run them as production services with session management, tracing, scheduling, and RBAC. Manage your agent platform using a single control plane.
+Agno provides software for building agent platforms.
+- Build agents using any agent framework.
+- Run them as production services with session management, tracing, scheduling, and RBAC.
+- Manage your platform using a single control plane.
 
 Agno has a 3-layer architecture. Everything except the control plane is free and open-source.
 
