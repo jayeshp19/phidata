@@ -9,12 +9,12 @@
 </div>
 
 <p align="center">
-  The cleanest way to build an agent platform.<br/>
+  Build, run, and manage your agent platform.<br/>
 </p>
 
 ## Introduction
 
-Agno provides software for building agent platforms.
+Agno provides software for building, running, and managing agent platforms.
 - Build agents using any agent framework.
 - Run them as production services with session management, tracing, scheduling, and RBAC.
 - Manage your platform using a single control plane.
