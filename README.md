@@ -104,16 +104,16 @@ fastapi dev workbench.py
 
 In 30 lines of code, you get:
 
-- A FastAPI backend with 50+ endpoints
+- A FastAPI based agent server with 50+ endpoints
 - Streaming responses, persistent sessions, per-user isolation
 - Cron scheduling, human approval flows, and RBAC
 - Native OpenTelemetry tracing
 
-API at `http://localhost:8000`. OpenAPI spec at `http://localhost:8000/docs`.
+The API is available at `http://localhost:8000`. Checkout the OpenAPI spec at `http://localhost:8000/docs`.
 
-### Manage it from the AgentOS UI
+### Manage your platform using the AgentOS UI
 
-The [AgentOS UI](https://os.agno.com) is your control plane. Test agents, inspect runs, view traces, manage sessions, and monitor system health. Free with a local AgentOS.
+The [AgentOS UI](https://os.agno.com) provides a control plane that connects directly to your running AgentOS. Test agents, inspect runs, view traces, manage sessions, and monitor system health.
 
 1. Open [os.agno.com](https://os.agno.com) and sign in.
 2. Click **"Connect OS"**.
@@ -135,7 +135,7 @@ https://github.com/user-attachments/assets/adb38f55-1d9d-463e-8ca9-966bb6bdc37a
 - [Build your first agent](https://docs.agno.com/first-agent)
 - [Build an auto-improving agent platform](https://docs.agno.com/tutorials/starter/overview)
 
-## Features
+## Advantages of building an agent-platform with Agno
 
 - [**Production API**](https://docs.agno.com/runtime/serve-as-api). 50+ endpoints with SSE and websockets to build a product on top of your agent platform.
 - [**Storage**](https://docs.agno.com/runtime/storage). Store sessions, memory, knowledge, and traces in your own database. Postgres for sessions and memory. ClickHouse for OLAP data like traces.
