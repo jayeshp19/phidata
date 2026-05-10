@@ -24,6 +24,8 @@ Here's what you can build:
 - [Scout →](https://docs.agno.com/tutorials/scout/overview) A context agent that navigates Slack and Google Drive to answer questions.
 - [Auto Improving Agent Platform →](https://docs.agno.com/tutorials/starter/overview) The leanest agent platform with a built-in auto-improvement loop.
 
+<img width="3502" height="2368" alt="demo-agentos" src="https://github.com/user-attachments/assets/9102deed-8f01-4309-bfdc-956952d76e9c" />
+
 ## Architecture
 
 Agno has a 3-layer architecture. Everything except the control plane is free and open-source.
