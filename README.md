@@ -14,7 +14,7 @@
 
 ## Introduction
 
-Agno is the SDK for building agent platforms.
+Agno is an SDK for building, running and managing agent platforms.
 
 Build agents using any framework. Run them as production services with sessions, memory, tracing, scheduling, and RBAC. Manage everything from a single control plane.
 
@@ -26,7 +26,7 @@ Here's what you can build:
 
 ## Architecture
 
-Agno has a 3-layer architecture that lets you build, run, and manage agent platforms. Everything except the control plane is free and open-source.
+Agno has a 3-layer architecture. Everything except the control plane is free and open-source.
 
 | Layer | Use it to |
 |-------|--------------|
