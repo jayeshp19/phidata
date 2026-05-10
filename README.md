@@ -155,7 +155,7 @@ Two options:
 1. **Add Agno docs as an indexed source.** In **Cursor:** Settings → Indexing & Docs → Add `https://docs.agno.com/llms-full.txt`. Also works in VSCode, Windsurf, and similar tools.
 2. **Add Agno docs as an MCP server.** Add [docs.agno.com/mcp](https://docs.agno.com/mcp) to your favourite coding agent.
 
-Read the full guide [here](https://docs.agno.com/coding-agents)
+Read the full guide [here](https://docs.agno.com/coding-agents).
 
 ## Community
 
