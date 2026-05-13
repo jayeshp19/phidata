@@ -24,7 +24,7 @@ Agno allows you to own your agent stack. Maintain control of your data, context,
 
 <img width="3192" height="2038" alt="demo-os" src="https://github.com/user-attachments/assets/6d21e6bc-111f-4b81-ba29-6550fead89b2" />
 
-## What can you build
+## What you can build
 
 Agno can bring any agent to life, here are some examples:
 
