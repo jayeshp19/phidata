@@ -16,13 +16,15 @@
 
 Agno is an SDK for building agent platforms.
 
-Build agents using any framework. Run them as production services with sessions, memory, tracing, scheduling, and RBAC. Manage everything from a single control plane.
+Build agents using any framework. Run them as production services with sessions, memory, tracing, scheduling, and RBAC. Manage everything from a single control plane. Framework-agnostic, model-agnostic, cloud-agnostic.
 
 Here's what you can build:
 - [Coda →](https://docs.agno.com/tutorials/coda/overview) A code companion that lives in Slack and works alongside your team.
 - [Dash →](https://docs.agno.com/tutorials/dash/overview) A self-learning data agent that grounds answers in 6 layers of context.
 - [Scout →](https://docs.agno.com/tutorials/scout/overview) A context agent that navigates Slack and Google Drive to answer questions.
-- [Auto Improving Agent Platform →](https://docs.agno.com/tutorials/starter/overview) The leanest agent platform with a built-in auto-improvement loop.
+- [Agent Platform →](https://docs.agno.com/tutorials/starter/overview) A starter agent platform with an auto-improvement loop.
+
+Your agent platforms come with a beautiful UI that looks like:
 
 <img width="3192" height="2038" alt="demo-os" src="https://github.com/user-attachments/assets/6d21e6bc-111f-4b81-ba29-6550fead89b2" />
 
@@ -33,7 +35,7 @@ Agno has a 3-layer architecture. Everything except the control plane is free and
 | Layer | Use it to |
 |-------|--------------|
 | **SDK** | Build agents, multi-agent teams, and agentic workflows. |
-| **Runtime** | Run your agents, teams, and workflows as a service. |
+| **Runtime** | Run your agents as a service with auth, security, RBAC. |
 | **Control Plane** | Manage your platform using the [AgentOS UI](https://os.agno.com). |
 
 ## Quickstart

@@ -28,6 +28,7 @@ from settings import default_model, sub_agent_model
 _REPO_URL = getenv("WIKI_REPO_URL")
 _TOKEN = getenv("WIKI_GITHUB_TOKEN")
 _BRANCH = getenv("WIKI_BRANCH", "main")
+# Where the local clone of the wiki is stored
 _LOCAL_PATH = getenv("WIKI_LOCAL_PATH") or str(
     Path(__file__).resolve().parents[1] / "data" / "git-wiki"
 )
