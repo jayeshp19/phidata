@@ -31,7 +31,7 @@ Agno can bring any agent to life, here are some examples:
 - [Coda →](https://docs.agno.com/tutorials/coda/overview) A code companion that lives in Slack and works alongside your team.
 - [Dash →](https://docs.agno.com/tutorials/dash/overview) A self-learning data agent that grounds answers in 6 layers of context.
 - [Scout →](https://docs.agno.com/tutorials/scout/overview) A context agent that navigates Slack and Google Drive to answer questions.
-- [Agent Platform →](https://docs.agno.com/tutorials/starter/overview) Build your own agent platform with an auto-improvement loop.
+- [Auto Improving Agent Platform →](https://docs.agno.com/tutorials/starter/overview) Build your own agent platform with an auto-improvement loop.
 
 ## Get started
 
