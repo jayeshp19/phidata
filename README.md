@@ -20,7 +20,7 @@ Agno is an SDK for building agent platforms.
 - Run them as production services with tracing, scheduling, and RBAC.
 - Manage using a single control plane.
 
-Agno allows you to own your agent stack. Maintaining control of your data, context, tools, permissions, memory and human-review loops. Run it in your cloud, and manage your stack using a beautiful UI.
+Agno allows you to own your agent stack. Maintain control of your data, context, tools, permissions, memory and human-review loops. Run your platform in your cloud, and manage it using a beautiful UI.
 
 <img width="3192" height="2038" alt="demo-os" src="https://github.com/user-attachments/assets/6d21e6bc-111f-4b81-ba29-6550fead89b2" />
 
