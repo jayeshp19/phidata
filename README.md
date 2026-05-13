@@ -24,7 +24,7 @@ Agno allows you to own your agent stack. Maintain control of your data, context,
 
 <img width="3192" height="2038" alt="demo-os" src="https://github.com/user-attachments/assets/6d21e6bc-111f-4b81-ba29-6550fead89b2" />
 
-## What you can build
+## What can you build
 
 Agno can bring any agent to life, here are some examples:
 
@@ -64,7 +64,7 @@ Read the full guide [here](https://docs.agno.com/coding-agents).
 ## Community
 
 - [X / Twitter](https://x.com/AgnoAgi) — follow for releases and demos
-- [Newsletter]([https://agno.com/newsletter](https://www.agno.com/the-agno-loop-newsleter) — monthly updates on what's shipping
+- [Newsletter]([https://agno.com/newsletter](https://www.agno.com/the-agno-loop-newsleter)) — monthly updates on what's shipping
 
 ## Contributing
 
